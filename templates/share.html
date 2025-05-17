@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Share Your Resume: {{ resume.title }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <span>Share your resume with potential employers, colleagues, or friends using the link below.</span>
+                </div>
+                
+                <form method="POST" action="{{ url_for('share_resume', resume_id=resume.id) }}">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            {{ form.is_public(class="form-check-input") }}
+                            {{ form.is_public.label(class="form-check-label") }}
+                        </div>
+                        <small class="text-muted">When enabled, anyone with the link can view your resume.</small>
+                    </div>
+                    
+                    <div class="mt-3">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+                
+                <hr>
+                
+                {% if resume.is_public %}
+                    <div class="mb-4">
+                        <label class="form-label">Public Share Link</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="shareLink" value="{{ share_url }}" readonly>
+                            <button class="btn btn-outline-primary" id="copyLink" type="button">
+                                <i class="fas fa-copy me-1"></i>Copy
+                            </button>
+                        </div>
+                        <small class="text-muted">Anyone with this link can view your resume.</small>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <p>Or share directly via:</p>
+                        <div class="d-flex justify-content-center">
+                            <a href="mailto:?subject=Check out my resume&body=Hello,%0D%0A%0D%0AI wanted to share my resume with you. You can view it here: {{ share_url }}%0D%0A%0D%0ARegards," class="btn btn-outline-secondary mx-1">
+                                <i class="fas fa-envelope me-1"></i>Email
+                            </a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}" target="_blank" class="btn btn-outline-primary mx-1">
+                                <i class="fab fa-linkedin me-1"></i>LinkedIn
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?text=Check out my professional resume&url={{ share_url }}" target="_blank" class="btn btn-outline-info mx-1">
+                                <i class="fab fa-twitter me-1"></i>Twitter
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-eye me-2"></i>Preview
+                                </h5>
+                                <p>See what others will see when they visit your shared resume link.</p>
+                                <a href="{{ share_url }}" target="_blank" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-external-link-alt me-1"></i>View Public Resume
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-lock me-2"></i>
+                        <span>Your resume is currently private. Enable "Make Resume Public" above to get a shareable link.</span>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="card-footer text-center">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Back to Dashboard</a>
+                <a href="{{ url_for('preview_resume', resume_id=resume.id) }}" class="btn btn-primary">Preview Resume</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const copyLinkBtn = document.getElementById('copyLink');
+        if (copyLinkBtn) {
+            copyLinkBtn.addEventListener('click', function() {
+                const shareLink = document.getElementById('shareLink');
+                shareLink.select();
+                document.execCommand('copy');
+                
+                // Change button text temporarily
+                const originalText = copyLinkBtn.innerHTML;
+                copyLinkBtn.innerHTML = '<i class="fas fa-check me-1"></i>Copied!';
+                
+                setTimeout(function() {
+                    copyLinkBtn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
+    });
+</script>
+{% endblock %}

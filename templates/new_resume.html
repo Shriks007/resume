@@ -1,0 +1,224 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">Create a New Resume</h3>
+            </div>
+            <div class="card-body">
+                <p class="mb-4">Get started by giving your resume a title and selecting a template. You can change these settings later.</p>
+                
+                <form method="POST" action="{{ url_for('new_resume') }}">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form.title.label(class="form-label") }}
+                                {% if form.title.errors %}
+                                    {{ form.title(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.title.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.title(class="form-control", placeholder="e.g. My Professional Resume") }}
+                                {% endif %}
+                                <small class="form-text text-muted">Give your resume a name to help you identify it later.</small>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                {{ form.template_id.label(class="form-label") }}
+                                {% if form.template_id.errors %}
+                                    {{ form.template_id(class="form-select is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.template_id.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.template_id(class="form-select") }}
+                                {% endif %}
+                                <small class="form-text text-muted">You can change the template anytime during editing.</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-5">
+                        <div class="col-md-4">
+                            <div class="card template-preview-card mb-3">
+                                <div class="card-body p-2">
+                                    <svg class="img-fluid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="100%">
+                                        <rect width="300" height="400" fill="#fff"/>
+                                        <rect x="20" y="20" width="260" height="40" fill="#0d6efd"/>
+                                        <rect x="30" y="30" width="150" height="20" fill="#fff"/>
+                                        <rect x="20" y="70" width="180" height="1" fill="#dee2e6"/>
+                                        <rect x="20" y="80" width="100" height="10" fill="#495057"/>
+                                        <rect x="20" y="100" width="260" height="80" fill="#f8f9fa"/>
+                                        <rect x="30" y="110" width="80" height="10" fill="#495057"/>
+                                        <rect x="30" y="130" width="240" height="5" fill="#6c757d"/>
+                                        <rect x="30" y="140" width="240" height="5" fill="#6c757d"/>
+                                        <rect x="30" y="150" width="240" height="5" fill="#6c757d"/>
+                                        <rect x="30" y="160" width="150" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="190" width="100" height="10" fill="#495057"/>
+                                        <rect x="20" y="210" width="260" height="1" fill="#dee2e6"/>
+                                        <rect x="20" y="220" width="100" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="230" width="100" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="250" width="100" height="10" fill="#495057"/>
+                                        <rect x="20" y="270" width="260" height="1" fill="#dee2e6"/>
+                                        <rect x="20" y="280" width="100" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="290" width="100" height="5" fill="#6c757d"/>
+                                    </svg>
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="template_preview" id="template1_preview" value="template1" checked>
+                                        <label class="form-check-label" for="template1_preview">
+                                            Professional
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card template-preview-card mb-3">
+                                <div class="card-body p-2">
+                                    <svg class="img-fluid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="100%">
+                                        <rect width="300" height="400" fill="#fff"/>
+                                        <rect x="0" y="0" width="100" height="400" fill="#6610f2"/>
+                                        <circle cx="50" cy="50" r="30" fill="#fff"/>
+                                        <rect x="20" y="90" width="60" height="1" fill="#fff"/>
+                                        <rect x="20" y="100" width="60" height="5" fill="#dee2e6"/>
+                                        <rect x="20" y="110" width="60" height="5" fill="#dee2e6"/>
+                                        <rect x="20" y="130" width="60" height="8" fill="#fff"/>
+                                        <rect x="20" y="145" width="60" height="5" fill="#dee2e6"/>
+                                        <rect x="20" y="155" width="60" height="5" fill="#dee2e6"/>
+                                        <rect x="20" y="180" width="60" height="8" fill="#fff"/>
+                                        <rect x="20" y="195" width="60" height="5" fill="#dee2e6"/>
+                                        <rect x="20" y="205" width="60" height="5" fill="#dee2e6"/>
+                                        <rect x="110" y="30" width="180" height="20" fill="#212529"/>
+                                        <rect x="110" y="60" width="180" height="5" fill="#6c757d"/>
+                                        <rect x="110" y="70" width="180" height="5" fill="#6c757d"/>
+                                        <rect x="110" y="80" width="120" height="5" fill="#6c757d"/>
+                                        <rect x="110" y="100" width="100" height="10" fill="#212529"/>
+                                        <rect x="110" y="120" width="180" height="5" fill="#6c757d"/>
+                                        <rect x="110" y="130" width="180" height="5" fill="#6c757d"/>
+                                        <rect x="110" y="140" width="180" height="5" fill="#6c757d"/>
+                                        <rect x="110" y="170" width="100" height="10" fill="#212529"/>
+                                        <rect x="110" y="190" width="70" height="5" fill="#6c757d"/>
+                                        <rect x="110" y="200" width="180" height="5" fill="#6c757d"/>
+                                        <rect x="110" y="210" width="180" height="5" fill="#6c757d"/>
+                                    </svg>
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="template_preview" id="template2_preview" value="template2">
+                                        <label class="form-check-label" for="template2_preview">
+                                            Creative
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card template-preview-card mb-3">
+                                <div class="card-body p-2">
+                                    <svg class="img-fluid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="100%">
+                                        <rect width="300" height="400" fill="#fff"/>
+                                        <rect x="20" y="20" width="260" height="60" fill="#f8f9fa"/>
+                                        <circle cx="50" cy="50" r="20" fill="#e9ecef"/>
+                                        <rect x="80" y="40" width="150" height="12" fill="#212529"/>
+                                        <rect x="80" y="60" width="100" height="8" fill="#6c757d"/>
+                                        <rect x="20" y="100" width="260" height="1" fill="#dee2e6"/>
+                                        <rect x="20" y="120" width="100" height="10" fill="#212529"/>
+                                        <rect x="20" y="140" width="260" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="150" width="260" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="160" width="200" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="190" width="100" height="10" fill="#212529"/>
+                                        <rect x="20" y="210" width="60" height="8" fill="#495057"/>
+                                        <rect x="20" y="225" width="260" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="235" width="260" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="260" width="60" height="8" fill="#495057"/>
+                                        <rect x="20" y="275" width="260" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="285" width="260" height="5" fill="#6c757d"/>
+                                        <rect x="20" y="320" width="100" height="10" fill="#212529"/>
+                                        <rect x="20" y="340" width="80" height="8" fill="#495057"/>
+                                        <rect x="120" y="340" width="80" height="8" fill="#495057"/>
+                                        <rect x="220" y="340" width="60" height="8" fill="#495057"/>
+                                    </svg>
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="template_preview" id="template3_preview" value="template3">
+                                        <label class="form-check-label" for="template3_preview">
+                                            Simple
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Cancel</a>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4 bg-light">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-lightbulb text-warning me-2"></i>Tips for Creating an Effective Resume
+                </h5>
+                <ul class="mb-0">
+                    <li>Keep your resume concise and focused on relevant information</li>
+                    <li>Tailor your resume to the specific job you're applying for</li>
+                    <li>Use action verbs to describe your accomplishments</li>
+                    <li>Proofread carefully to avoid errors</li>
+                    <li>Include quantifiable achievements when possible</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sync the template radio buttons with the select field
+        const templateSelect = document.getElementById('template_id');
+        const templateRadios = document.querySelectorAll('input[name="template_preview"]');
+        
+        // Set initial value
+        templateRadios.forEach(radio => {
+            if (radio.value === templateSelect.value) {
+                radio.checked = true;
+            }
+        });
+        
+        // Update select when radio changes
+        templateRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    templateSelect.value = this.value;
+                }
+            });
+        });
+        
+        // Update radio when select changes
+        templateSelect.addEventListener('change', function() {
+            templateRadios.forEach(radio => {
+                if (radio.value === this.value) {
+                    radio.checked = true;
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

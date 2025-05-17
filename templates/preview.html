@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/templates.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="h3 mb-1">{{ resume.title }}</h1>
+            <p class="text-muted mb-0">
+                <span>Template: {{ resume.template_id|capitalize }}</span>
+                {% if not public %}
+                | <span>Last updated: {{ resume.updated_at.strftime('%b %d, %Y at %H:%M') }}</span>
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <div class="btn-group">
+                {% if not public %}
+                <a href="{{ url_for('edit_resume', resume_id=resume.id) }}" class="btn btn-outline-primary">
+                    <i class="fas fa-pencil-alt me-1"></i>Edit
+                </a>
+                <a href="{{ url_for('share_resume', resume_id=resume.id) }}" class="btn btn-outline-info">
+                    <i class="fas fa-share-alt me-1"></i>Share
+                </a>
+                {% endif %}
+                <button id="downloadPdfBtn" class="btn btn-success">
+                    <i class="fas fa-download me-1"></i>Download PDF
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body p-3">
+        <div class="resume-preview-container">
+            <div id="resumePreview" class="resume-preview">
+                <!-- Resume preview will be rendered here -->
+                <div class="resume-loading text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3">Loading resume preview...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not public %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-lightbulb text-warning me-2"></i>Tips for Using Your Resume
+                </h5>
+                <ul class="mb-0">
+                    <li>Download your resume as a PDF to ensure consistent formatting</li>
+                    <li>Review your resume for spelling and grammar errors</li>
+                    <li>Keep your contact information up to date</li>
+                    <li>Tailor your resume to specific job applications by highlighting relevant skills and experiences</li>
+                    <li>Share your resume with a unique link to make it easily accessible to recruiters</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Resume data storage -->
+<div id="resumeData" data-resume-id="{{ resume.id }}" data-template-id="{{ resume.template_id }}" hidden></div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="{{ url_for('static', filename='js/templates.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pdf-generator.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const resumeId = document.getElementById('resumeData').dataset.resumeId;
+        const templateId = document.getElementById('resumeData').dataset.templateId;
+        
+        // Check if this is a download request
+        const urlParams = new URLSearchParams(window.location.search);
+        const isDownloadRequest = urlParams.get('download') === 'true';
+        
+        // Fetch resume data and render preview
+        fetch(`/api/resume/${resumeId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load resume data');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const resumePreview = document.getElementById('resumePreview');
+                resumePreview.innerHTML = generateResumeHTML(templateId, data.content);
+                
+                // If this is a download request, trigger PDF download after rendering
+                if (isDownloadRequest) {
+                    // Give the browser time to fully render the content
+                    setTimeout(() => {
+                        generateResumePDF();
+                    }, 1000);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const resumePreview = document.getElementById('resumePreview');
+                resumePreview.innerHTML = `<div class="alert alert-danger">Failed to load resume: ${error.message}</div>`;
+            });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,43 @@
+ERROR:local_main:Exception on /login [POST]
+Traceback (most recent call last):
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\wtforms\validators.py", line 401, in __call__
+    import email_validator
+ModuleNotFoundError: No module named 'email_validator'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Shrikanth\Downloads\res (1)\res\local_routes.py", line 37, in login
+    if form.validate_on_submit():
+       ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\flask_wtf\form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate(extra_validators=extra_validators)
+                                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\wtforms\form.py", line 330, in validate
+    return super().validate(extra)
+           ~~~~~~~~~~~~~~~~^^^^^^^
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\wtforms\form.py", line 147, in validate
+    if not field.validate(self, extra):
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\wtforms\fields\core.py", line 234, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\wtforms\fields\core.py", line 254, in _run_validation_chain
+    validator(form, self)
+    ~~~~~~~~~^^^^^^^^^^^^
+  File "c:\Users\Shrikanth\Downloads\res (1)\res\venv\Lib\site-packages\wtforms\validators.py", line 403, in __call__
+    raise Exception(
+        "Install 'email_validator' for email validation support."
+    ) from exc
+Exception: Install 'email_validator' for email validation support.
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2025 20:01:08] "POST /login HTTP/1.1" 500 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2025 20:01:08] "GET /static/css/style.css HTTP/1.1" 304 -
+INFO:werkzeug:127.0.0.1 - - [21/Apr/2025 20:01:08] "GET /static/js/main.js HTTP/1.1" 304 -

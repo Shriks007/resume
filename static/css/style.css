@@ -1,0 +1,234 @@
+/* Navbar Styles */
+.navbar {
+    min-height: 85px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.watermark {
+    font-size: 0.8em;
+    opacity: 0.8;
+    text-align: center;
+    margin-top: 2px;
+    font-style: italic;
+}
+
+.navbar-brand {
+    font-size: 1.6rem;
+}
+
+/* Global Styles */
+:root {
+    --primary-color: #FF6B6B;
+    --secondary-color: #4ECDC4;
+    --dark-color: #2C3E50;
+    --light-color: #f9f7f7;
+    --success-color: #95E1D3;
+    --danger-color: #FF8B94;
+    --warning-color: #FFD93D;
+    --info-color: #6C5CE7;
+}
+
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f0f2f5;
+    color: var(--dark-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.team-members {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.team-members li {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--dark-color);
+}
+
+.navbar {
+    background-color: var(--primary-color) !important;
+}
+
+.navbar-brand, .nav-link {
+    color: white !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #ff5252;
+    border-color: #ff5252;
+}
+
+.card {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    flex: 1;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.team-members {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.team-members li {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.team-members h5 {
+    color: #0d6efd;
+    margin-bottom: 10px;
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Cards */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+/* Template Previews */
+.template-preview {
+    background-color: white;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.template-card {
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.template-card:hover, .template-card.selected {
+    border-color: var(--primary-color);
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* Resume Preview */
+.resume-preview-container {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    max-height: 800px;
+    overflow-y: auto;
+}
+
+/* Form Styles */
+.form-control:focus, .form-select:focus {
+    border-color: rgba(13, 110, 253, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* Dashboard Resume Cards */
+@media (min-width: 768px) {
+    .col-md-4 .card {
+        height: calc(100% - 1rem);
+    }
+}
+
+/* Footer Styles */
+footer {
+    margin-top: 2rem;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Alert Styles */
+.alert-dismissible {
+    padding-right: 3rem;
+}
+
+/* Auto-save Indicator */
+.auto-save-active {
+    color: var(--warning-color);
+}
+
+.auto-save-success {
+    color: var(--success-color);
+}
+
+.auto-save-error {
+    color: var(--danger-color);
+}
+
+/* Resume Editor */
+.accordion-button:not(.collapsed) {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: var(--primary-color);
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Experience and Education Items */
+.experience-item, .education-item {
+    background-color: #f8f9fa;
+}
+
+.remove-item {
+    z-index: 1;
+}

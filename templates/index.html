@@ -1,0 +1,235 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="hero bg-light py-5 rounded">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Simple Resume Builder</h1>
+                <p class="lead mb-4">Create and download professional resumes easily with our simple tool.</p>
+                <div class="d-grid gap-2 d-md-flex">
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('new_resume') }}" class="btn btn-primary btn-lg px-4 me-md-2">Create Resume</a>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-lg px-4">My Resumes</a>
+                    {% else %}
+                        <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg px-4 me-md-2">Get Started</a>
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-lg px-4">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+                <svg class="img-fluid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="400">
+                    <rect x="100" y="50" width="300" height="400" rx="10" fill="#fff" stroke="#000" stroke-width="2"/>
+                    <rect x="120" y="70" width="120" height="120" rx="5" fill="#f8f9fa" stroke="#6c757d" stroke-width="1"/>
+                    <circle cx="180" cy="130" r="40" fill="#e9ecef" stroke="#6c757d" stroke-width="1"/>
+                    <rect x="250" y="70" width="130" height="25" rx="3" fill="#e9ecef"/>
+                    <rect x="250" y="105" width="130" height="15" rx="3" fill="#e9ecef"/>
+                    <rect x="250" y="130" width="130" height="15" rx="3" fill="#e9ecef"/>
+                    <rect x="250" y="155" width="90" height="15" rx="3" fill="#e9ecef"/>
+                    <rect x="120" y="210" width="260" height="15" rx="3" fill="#e9ecef"/>
+                    <rect x="120" y="235" width="260" height="15" rx="3" fill="#e9ecef"/>
+                    <rect x="120" y="270" width="260" height="20" rx="3" fill="#0d6efd" opacity="0.7"/>
+                    <rect x="120" y="300" width="260" height="15" rx="3" fill="#e9ecef"/>
+                    <rect x="120" y="325" width="260" height="15" rx="3" fill="#e9ecef"/>
+                    <rect x="120" y="350" width="260" height="15" rx="3" fill="#e9ecef"/>
+                    <rect x="120" y="385" width="170" height="15" rx="3" fill="#e9ecef"/>
+                    <rect x="120" y="415" width="110" height="15" rx="3" fill="#0d6efd" opacity="0.5"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Key Features</h2>
+            <p class="lead text-muted">Everything you need to create impressive resumes</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                            <i class="fas fa-file-alt fa-2x p-3"></i>
+                        </div>
+                        <h4>Multiple Templates</h4>
+                        <p class="text-muted">Choose from a variety of professional templates designed to impress employers.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                            <i class="fas fa-pencil-alt fa-2x p-3"></i>
+                        </div>
+                        <h4>Real-time Editing</h4>
+                        <p class="text-muted">See changes as you make them with our intuitive real-time editor.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                            <i class="fas fa-download fa-2x p-3"></i>
+                        </div>
+                        <h4>PDF Download</h4>
+                        <p class="text-muted">Export your resume as a professional PDF ready to send to employers.</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</section>
+
+<section class="templates py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Professional Templates</h2>
+            <p class="lead text-muted">Choose the perfect design for your resume</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="template-preview border">
+                            <svg class="img-fluid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="100%">
+                                <rect width="300" height="400" fill="#fff"/>
+                                <rect x="20" y="20" width="260" height="40" fill="#0d6efd"/>
+                                <rect x="30" y="30" width="150" height="20" fill="#fff"/>
+                                <rect x="20" y="70" width="180" height="1" fill="#dee2e6"/>
+                                <rect x="20" y="80" width="100" height="10" fill="#495057"/>
+                                <rect x="20" y="100" width="260" height="80" fill="#f8f9fa"/>
+                                <rect x="30" y="110" width="80" height="10" fill="#495057"/>
+                                <rect x="30" y="130" width="240" height="5" fill="#6c757d"/>
+                                <rect x="30" y="140" width="240" height="5" fill="#6c757d"/>
+                                <rect x="30" y="150" width="240" height="5" fill="#6c757d"/>
+                                <rect x="30" y="160" width="150" height="5" fill="#6c757d"/>
+                                <rect x="20" y="190" width="100" height="10" fill="#495057"/>
+                                <rect x="20" y="210" width="260" height="1" fill="#dee2e6"/>
+                                <rect x="20" y="220" width="100" height="5" fill="#6c757d"/>
+                                <rect x="20" y="230" width="100" height="5" fill="#6c757d"/>
+                                <rect x="20" y="250" width="100" height="10" fill="#495057"/>
+                                <rect x="20" y="270" width="260" height="1" fill="#dee2e6"/>
+                                <rect x="20" y="280" width="100" height="5" fill="#6c757d"/>
+                                <rect x="20" y="290" width="100" height="5" fill="#6c757d"/>
+                            </svg>
+                        </div>
+                        <div class="p-3 text-center">
+                            <h5>Professional</h5>
+                            <p class="text-muted small mb-0">Clean and organized layout perfect for traditional industries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="template-preview border">
+                            <svg class="img-fluid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="100%">
+                                <rect width="300" height="400" fill="#fff"/>
+                                <rect x="0" y="0" width="100" height="400" fill="#6610f2"/>
+                                <circle cx="50" cy="50" r="30" fill="#fff"/>
+                                <rect x="20" y="90" width="60" height="1" fill="#fff"/>
+                                <rect x="20" y="100" width="60" height="5" fill="#dee2e6"/>
+                                <rect x="20" y="110" width="60" height="5" fill="#dee2e6"/>
+                                <rect x="20" y="130" width="60" height="8" fill="#fff"/>
+                                <rect x="20" y="145" width="60" height="5" fill="#dee2e6"/>
+                                <rect x="20" y="155" width="60" height="5" fill="#dee2e6"/>
+                                <rect x="20" y="180" width="60" height="8" fill="#fff"/>
+                                <rect x="20" y="195" width="60" height="5" fill="#dee2e6"/>
+                                <rect x="20" y="205" width="60" height="5" fill="#dee2e6"/>
+                                <rect x="110" y="30" width="180" height="20" fill="#212529"/>
+                                <rect x="110" y="60" width="180" height="5" fill="#6c757d"/>
+                                <rect x="110" y="70" width="180" height="5" fill="#6c757d"/>
+                                <rect x="110" y="80" width="120" height="5" fill="#6c757d"/>
+                                <rect x="110" y="100" width="100" height="10" fill="#212529"/>
+                                <rect x="110" y="120" width="180" height="5" fill="#6c757d"/>
+                                <rect x="110" y="130" width="180" height="5" fill="#6c757d"/>
+                                <rect x="110" y="140" width="180" height="5" fill="#6c757d"/>
+                                <rect x="110" y="170" width="100" height="10" fill="#212529"/>
+                                <rect x="110" y="190" width="70" height="5" fill="#6c757d"/>
+                                <rect x="110" y="200" width="180" height="5" fill="#6c757d"/>
+                                <rect x="110" y="210" width="180" height="5" fill="#6c757d"/>
+                            </svg>
+                        </div>
+                        <div class="p-3 text-center">
+                            <h5>Creative</h5>
+                            <p class="text-muted small mb-0">Modern design with sidebar for creative professionals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="template-preview border">
+                            <svg class="img-fluid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="100%">
+                                <rect width="300" height="400" fill="#fff"/>
+                                <rect x="20" y="20" width="260" height="60" fill="#f8f9fa"/>
+                                <circle cx="50" cy="50" r="20" fill="#e9ecef"/>
+                                <rect x="80" y="40" width="150" height="12" fill="#212529"/>
+                                <rect x="80" y="60" width="100" height="8" fill="#6c757d"/>
+                                <rect x="20" y="100" width="260" height="1" fill="#dee2e6"/>
+                                <rect x="20" y="120" width="100" height="10" fill="#212529"/>
+                                <rect x="20" y="140" width="260" height="5" fill="#6c757d"/>
+                                <rect x="20" y="150" width="260" height="5" fill="#6c757d"/>
+                                <rect x="20" y="160" width="200" height="5" fill="#6c757d"/>
+                                <rect x="20" y="190" width="100" height="10" fill="#212529"/>
+                                <rect x="20" y="210" width="60" height="8" fill="#495057"/>
+                                <rect x="20" y="225" width="260" height="5" fill="#6c757d"/>
+                                <rect x="20" y="235" width="260" height="5" fill="#6c757d"/>
+                                <rect x="20" y="260" width="60" height="8" fill="#495057"/>
+                                <rect x="20" y="275" width="260" height="5" fill="#6c757d"/>
+                                <rect x="20" y="285" width="260" height="5" fill="#6c757d"/>
+                                <rect x="20" y="320" width="100" height="10" fill="#212529"/>
+                                <rect x="20" y="340" width="80" height="8" fill="#495057"/>
+                                <rect x="120" y="340" width="80" height="8" fill="#495057"/>
+                                <rect x="220" y="340" width="60" height="8" fill="#495057"/>
+                            </svg>
+                        </div>
+                        <div class="p-3 text-center">
+                            <h5>Simple</h5>
+                            <p class="text-muted small mb-0">Minimalist design focusing on content and readability</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('new_resume') }}" class="btn btn-primary btn-lg">Start Building Your Resume</a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg">Sign Up to Get Started</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="cta py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bold mb-4">Ready to create an impressive resume?</h2>
+                <p class="lead mb-4">Join thousands of job seekers who have successfully built professional resumes with our tool.</p>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('new_resume') }}" class="btn btn-success btn-lg px-5">Create Your Resume Now</a>
+                {% else %}
+                    <a href="{{ url_for('register') }}" class="btn btn-success btn-lg px-5">Get Started for Free</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
